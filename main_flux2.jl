@@ -50,15 +50,6 @@ function my_custom_train!(ps, data, opt)
     Flux.update!(opt, ps, gs)
     return training_loss
 end
-#     for d in data
-#         gs = gradient(ps) do
-#             training_loss = mean(logitbinarycrossentropy.(UNet_model(d[1]), d[2]))
-#             return training_loss
-#         end
-#         Flux.update!(opt, ps, gs)
-#     end
-#     return gs
-# end
 
 for i in 1:epoch_num
     epoch_loss, cnt = 0.0, 0
