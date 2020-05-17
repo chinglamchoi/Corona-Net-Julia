@@ -26,9 +26,6 @@ struct UNet
     conv_
 end
 
-# Flux.@functor UNet
-#  
-
 function UNet()
     conv_block = (block1(3, 32), block2(32, 32*2), block2(32*2, 32*4), block2(32*4, 32*8))
     conv_block2 = (block1(32*16, 32*8), block1(32*8, 32*4), block1(32*4, 32*2), block1(32*2, 32))
@@ -61,9 +58,3 @@ function (u::UNet)(x)
     dec1 = u.conv_block2[4](dec1) |> gpu
     dec1 = u.conv_(dec1) |> gpu
 end
-
-
-# model = UNet() |> gpu
-# a = ones((256, 256, 3, 1)) |> gpu
-# b = cpu(model(a))
-# println(maximum(b), minimum(b))
